@@ -1,7 +1,6 @@
 #!/bin/bash
 set -eu  # Exit on error
 
-
 storage_dir=$1
 librispeech_dir=$storage_dir/LibriSpeech
 wham_dir=$storage_dir/wham_noise
