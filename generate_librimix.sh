@@ -50,7 +50,6 @@ function wham() {
 	if ! test -e $wham_dir; then
 		echo "Download wham_noise into $storage_dir"
 		# If downloading stalls for more than 20s, relaunch from previous state.
-		wget -c --tries=0 --read-timeout=20 https://storage.googleapis.com/whisper-public/wham_noise.zip -P $storage_dir
 		unzip -qn $storage_dir/wham_noise.zip -d $storage_dir
 		rm -rf $storage_dir/wham_noise.zip
 	fi
@@ -60,7 +59,6 @@ LibriSpeech_dev_clean &
 LibriSpeech_test_clean &
 LibriSpeech_clean100 &
 LibriSpeech_clean360 &
-wham &
 
 wait
 
@@ -77,7 +75,7 @@ for n_src in 2 3; do
     --metadata_dir $metadata_dir \
     --librimix_outdir $librimix_outdir \
     --n_src $n_src \
-    --freqs 8k 16k \
-    --modes min max \
+    --freqs 8k \
+    --modes min \
     --types mix_clean mix_both mix_single
 done
